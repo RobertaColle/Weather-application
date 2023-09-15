@@ -3,161 +3,75 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <link rel="stylesheet" href="src/style.css" />
-    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
     <title>Weather App</title>
   </head>
   <body>
     <div class="container">
-      <div class="weather-app">
-        <form class="search-form" id="search-form">
-          <div class="row">
-            <div class="col-6">
-              <input
-                type="search"
-                placeholder="Type a city.."
-                class="form-control"
-                autofocus="on"
-                autocomplete="off"
-                id="city-input"
-              />
-            </div>
-            <div class="col-3">
-              <input
-                type="submit"
-                value="Search"
-                class="form-control btn btn-primary shadow-sm w-100"
-                id="search1"
-              />
-            </div>
-            <div class="col-3">
-              <button class="btn btn-success w-100" id="buttonBtn1">
-                Current
-              </button>
-            </div>
-            <div class="col-3"></div>
-          </div>
-        </form>
-        <h1 id="city">Crema, Italia</h1>
-        <ul>
-          <li id="date">Tuesday 16:00</li>
-          <li>Partly Cloudy</li>
-        </ul>
-        <div class="row">
-          <div class="col-6">
-            <div class="clearfix">
-              <div class=""></div>
-              <img
-                src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
-                alt="Cloudy icon"
-                class="weather-icon float-left"
-              />
-              <div class="float-left">
-                <span class="temperature" id="temperature">19</span>
-                <span class="units">
-                  <a href="#" id="celsius-link">°C </a> |
-                  <a href="#" id="fahrenheit-link">°F</a>
-                </span>
+      <div class="weather-app-wrapper">
+        <div class="weather-app">
+          <form id="search-form" class="mb-3">
+            <div class="row">
+              <div class="col-9">
+                <input
+                  type="search"
+                  placeholder="Type a city.."
+                  class="form-control"
+                  id="city-input"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="col-3">
+                <input
+                  type="submit"
+                  value="Search"
+                  class="btn btn-primary w-100"
+                />
               </div>
             </div>
-          </div>
-          <div class="col-6">
+          </form>
+          <div class="overview">
+            <h1 id="city"></h1>
             <ul>
-              <li>Precipitation: 0%</li>
-              <li>Humidity:87%</li>
-              <li>Wind: 8km/h</li>
+              <li>Last updated: <span id="date"></span></li>
+              <li id="description"></li>
             </ul>
           </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="clearfix weather-temperature">
+                <img src="" alt="Clear" id="icon" class="float-left" />
+                <div class="float-left">
+                  <strong id="temperature"></strong
+                  ><span class="units"> °C</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <ul>
+                <li>Humidity: <span id="humidity"></span>%</li>
+                <li>Wind: <span id="wind"></span> km/h</li>
+              </ul>
+            </div>
+          </div>
+          <div class="weather-forecast" id="forecast"></div>
         </div>
-        <div class="row">
-          <div class="col-2">
-            <p>
-              Mon <br />
-              <i class="sunny">
-                <img
-                  src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
-                  alt="Sunny icon"
-                />
-              </i>
-              <br />
-              22°C
-            </p>
-          </div>
-          <div class="col-2">
-            <p>
-              Tue <br />
-              <i class="stormy">
-                <img
-                  src="https://ssl.gstatic.com/onebox/weather/64/thunderstorms.png"
-                  alt="Stormy icon"
-                />
-              </i>
-              <br />
-              18°C
-            </p>
-          </div>
-          <div class="col-2">
-            <p>
-              Wed <br />
-              <i class="rainy">
-                <img
-                  src="https://ssl.gstatic.com/onebox/weather/64/rain_s_cloudy.png"
-                  alt="Rainy icon"
-                />
-              </i>
-              <br />
-              19°C
-            </p>
-          </div>
-          <div class="col-2">
-            <p>
-              Thu <br />
-              <i class="sunny">
-                <img
-                  src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
-                  alt="Sunny icon"
-                />
-              </i>
-              <br />
-              25°C
-            </p>
-          </div>
-          <div class="col-2">
-            <p>
-              Fri <br />
-              <i class="">
-                <img
-                  src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
-                  alt="Cloudy icon"
-                />
-              </i>
-              <br />
-              21°C
-            </p>
-          </div>
-          <div class="col-2">
-            <p>
-              Sat <br />
-              <i class="">
-                <img
-                  src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
-                  alt="Sunny icon"
-                />
-              </i>
-              <br />
-              25°C
-            </p>
-          </div>
-        </div>
-        <small class="footer">
-          <a href="https://" target="_blank">Open-source code</a>
-          by Roberta Colle
+        <small>
+          <a
+            href="https://github.com/wecodeschool/vanilla-weather-app"
+            target="_blank"
+            >Open-source code</a
+          >
+          by Matt Delac
         </small>
       </div>
     </div>
